@@ -1,0 +1,155 @@
+<html>
+	<head>
+		<!-- <script src="p5.min.js"></script> -->
+		<script src="draw.js"></script>
+		<!-- <script src="navigation.js"></script> -->
+		<script src="generator.js"></script>
+		<style>
+			/* Style the tab */
+			.tab {
+				overflow: hidden;
+				border: 1px solid #ccc;
+				background-color: #f1f1f1;
+			}
+
+			/* Style the buttons that are used to open the tab content */
+			.tab button {
+				background-color: inherit;
+				float: left;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 14px 16px;
+				transition: 0.3s;
+			}
+
+			/* Change background color of buttons on hover */
+			.tab button:hover {
+				background-color: #ddd;
+			}
+
+			/* Create an active/current tablink class */
+			.tab button.active {
+				background-color: #ccc;
+			}
+
+			/* Style the tab content */
+			.tabcontent {
+				display: none;
+				padding: 6px 12px;
+				border: 1px solid #ccc;
+				border-top: none;
+			}
+		</style>
+	</head>
+	<body onload="generate()">
+		<main>
+			<div style="float: left;">
+				<table>
+					<tr>
+						<td>Name:</td>
+						<td><input type="text" id="name" onchange="set_name(this.value)" value=""></td>
+					</tr>
+					<tr>
+						<td>1.Layer:</td>
+						<td><input type="text" id="layer1" onchange="generate()" value="F.Cu"></td>
+					</tr>
+					<tr>
+						<td>2.Layer:</td>
+						<td><input type="text" id="layer2" onchange="generate()" value="B.Cu"></td>
+					</tr>
+					<tr>
+						<td>Inner Diameter:</td>
+						<td><input type="number" id="inner_diameter" onchange="generate()" value="32" step="0.1"></td>
+					</tr>
+					<tr>
+						<td>Magnet Width:</td>
+						<td><input type="number" id="magnet_width" onchange="generate()" value="5" step="0.1"></td>
+					</tr>
+					<tr>
+						<td>Pole Count:</td>
+						<td><input type="number" id="pole_count" onchange="generate()" value="24"></td>
+					</tr>
+					<tr>
+						<td>Via Hole Size:</td>
+						<td><input type="number" id="via_hole_size" onchange="generate()" value="0.15" step="0.01"></td>
+					</tr>
+					<tr>
+						<td>Via Ring Size:</td>
+						<td><input type="number" id="via_ring_size" onchange="generate()" value="0.15" step="0.01"></td>
+					</tr>
+					<tr>
+						<td>Min. Via Ring Distance:</td>
+						<td><input type="number" id="via_distance" onchange="generate()" value="0.15" step="0.01"></td>
+					</tr>
+					<tr>
+						<td>Track Width:</td>
+						<td><input type="number" id="track_width" onchange="generate()" value="0.15" step="0.01"></td>
+					</tr>
+					<tr>
+						<td>Inner Distance:</td>
+						<td><input type="number" id="inner_distance" onchange="generate()" value="2.5" step="0.1"></td>
+					</tr>
+					<tr>
+						<td>Outer Distance:</td>
+						<td><input type="number" id="outer_distance" onchange="generate()" value="4.0" step="0.1"></td>
+					</tr>
+					<!-- <tr>
+						<td>Type:</td>
+						<td><label for="linear">Linear:</label>
+							<input id="linear" type="radio" name="type" value="linear" oninput="generate()">
+							<label for="sheer">Sheer:</label>
+							<input id="sheer" type="radio" name="type" value="sheer" checked oninput="generate()">
+						</td>
+					</tr> -->
+					<!-- <tr>
+						<td>Arc Double:</td>
+						<td><input type="number" id="arc_double" onchange="generate()" value="4"></td>
+					</tr>
+					<tr>
+						<td>Parity:</td>
+						<td><label for="odd">Odd:</label>
+							<input id="odd" type="radio" name="parity" value="odd" checked oninput="generate()">
+							<label for="even">Even:</label>
+							<input id="even" type="radio" name="parity" value="even" oninput="generate()">
+						</td>
+					</tr>
+					<tr>
+						<td>Mirror:</td>
+						<td><label for="horizontal">Horizontal:</label>
+							<input type="checkbox" id="horizontal" name="mirror" value="horizontal" oninput="generate()">
+							<label for="vertical">Vertical:</label>
+							<input type="checkbox" id="vertical" name="mirror" value="vertical" oninput="generate()">
+						</td>
+					</tr> -->
+					<tr>
+						<td>Zoom:</td>
+						<td><input type="number" id="zoom" onchange="generate()" value="10"></td>
+					</tr>
+					<tr>
+						<td>Pad Offset:</td>
+						<td><input type="number" id="pad_offset" onchange="generate()" value="0"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button onclick="save_generated()" style="width: 100%;">Save</button>
+						</td>
+					</tr>
+				</table>
+				<div>
+					<H4>TODOs:</H4>
+					<form action="/action_page.php">
+						<input type="checkbox"> add parameter inputs<br>
+						<input type="checkbox"> generate circle pattern<br>
+					</form>
+				</div>
+			</div>
+			<canvas style="float: left;"id="canvas" width="800" height="800"></canvas>
+
+			<div style="float: left;" width="100%">
+				<textarea id="output" style="width:1000; height: 800; resize: none;" wrap="off">
+				</textarea>
+			</div>
+		</main>
+	</body>
+</html>
